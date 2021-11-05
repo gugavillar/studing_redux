@@ -4,7 +4,7 @@ export interface Product {
   price: number;
 }
 
-interface ICartItem {
+export interface ICartItem {
   product: Product;
   quantity: number;
 }
