@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { ICartState } from "./types";
+import { ActionType, ICartState } from "./types";
 import produce from 'immer';
 
 const INITIAL_STATE: ICartState = {
@@ -11,7 +11,7 @@ const INITIAL_STATE: ICartState = {
 export const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case 'ADD_PRODUCT_TO_CART_SUCCESS': {
+      case ActionType.addProductToCartSuccess: {
         const { product } = action.payload;
         const productInCartIndex = draft.items.findIndex(item => item.product.id === product.id);
 
@@ -25,7 +25,7 @@ export const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
         }
         break;
       }
-      case 'ADD_PRODUCT_TO_CART_FAILURE': {
+      case ActionType.addProductToCartFailure: {
         draft.failedStockCheck.push(action.payload.productId);
         break;
       }
